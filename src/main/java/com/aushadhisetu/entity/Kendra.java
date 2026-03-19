@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -45,6 +47,9 @@ public class Kendra {
             return now.isAfter(openingTime) || now.isBefore(closingTime);
         }
     }
+
+    @OneToMany(mappedBy = "kendra", cascade = CascadeType.ALL)
+    private List<Stock> stocks = new ArrayList<>();
 
 
 
