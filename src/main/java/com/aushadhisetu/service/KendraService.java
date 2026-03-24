@@ -3,6 +3,7 @@ package com.aushadhisetu.service;
 import com.aushadhisetu.entity.Kendra;
 import com.aushadhisetu.repository.KendraRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,19 +17,26 @@ public class KendraService {
         this.kendraRepository = kendraRepository;
     }
 
+    //getKendraById
+    @Transactional(readOnly = true)
     public Kendra getKendraById(Long id) {
         return kendraRepository.findById(id).orElse(null);
     }
 
+    //getKendraByCity
+    @Transactional(readOnly = true)
     public List<Kendra> getKendraByCity(String city){
         return kendraRepository.findByCity(city);
     }
 
+    //registerKendra
+    @Transactional
     public Kendra registerKendra(Kendra kendra){
         return kendraRepository.save(kendra);
     }
 
-
+    //updateKendra
+    @Transactional
     public Kendra updatedKendra(Long id, Kendra kendra){
         Optional<Kendra> optionalKendra = kendraRepository.findById(id);
 
